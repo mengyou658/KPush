@@ -4,7 +4,8 @@
   "description": "A push server for kindle based on www.zoudupai.com",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node cli.js"
   },
   "bin": {
     "kpush": "./cli.js"
