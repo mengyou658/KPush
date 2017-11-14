@@ -13,8 +13,10 @@
 <div class="container">
     <div class="page-header text-center">
         <h1>小孔专用Kindle推送服务
-            <small>其他人使用，请将79096834@qq.com加入kindle的允许接收名单</small>
         </h1>
+        <h4>
+            <small>其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单</small>
+        </h4>
     </div>
     <div class="panel panel-default">
         <div class="panel-heading"><h4>在线搜索（走读派）</h4></div>
@@ -32,9 +34,12 @@
         </div>
     </div>
     <div class="page-header text-center">
-        <h1>小孔专用Kindle推送服务
-            <small class="text-info">其他人使用，请将79096834@qq.com加入kindle的允许接收名单</small>
-        </h1>
+        <h1>小孔专用Kindle推送服务</h1>
+        <h4>
+            <small class="text-info">其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单,<a
+                    href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=201974220"
+                    target="_blank">官方设置教程</a></small>
+        </h4>
     </div>
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -66,7 +71,18 @@
         </div>
     </div>
     <div class="panel panel-info">
-        <div class="panel-heading"><h4>自定义上传</h4></div>
+        <div class="panel-heading"><h4>自定义上传</h4>
+            <h4>
+                <small>文件类型限制：mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf<a
+                        href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
+                        target="_blank">参考官方文档</a></small>
+            </h4>
+            <h4>
+                <small>文件大小限制：最大50 MB<a
+                        href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
+                        target="_blank">参考官方文档</a></small>
+            </h4>
+        </div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
@@ -151,7 +167,11 @@
             // 选择文件的按钮。可选。
             // 内部根据当前运行是创建，可能是input元素，也可能是flash.
             pick: '#filePicker',
-
+            accept: {
+                title: 'Kindle文件',
+                extensions: 'mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf',
+                mimeTypes: '*'
+            }
         });
 
         // 当有文件添加进来的时候
@@ -209,7 +229,7 @@
         uploader.on('uploadComplete', function (file) {
             $('#' + file.id).find('.progress').remove();
             $("#fileList").empty();
-            if(uploader) {
+            if (uploader) {
                 uploader.destory();
             }
             init();
