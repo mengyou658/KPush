@@ -13,6 +13,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports = path => {
   return new Promise((resolve, reject) => {
+    console.log(path)
     transporter.sendMail({
       from: 'noreply  <' + config.user + '>',
       to: config.kindle,

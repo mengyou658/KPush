@@ -5,80 +5,49 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>KPush服务</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0px;
-    }
-    .container {
-      height: 100%;
-      display: flex;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    h2 {
-      margin-top: 0;
-      color: #0d79d1;
-    }
-    .input {
-      background: #f7f8fa;
-      height: 34px;
-      width: 70%;
-      padding: 4px 10px;
-      font-size: 14px;
-      border: 1px solid #e7eaf1;
-      border-radius: 3px;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-    }
-    input {
-      height: 100%;
-      width: 100%;
-      padding: 0;
-      overflow: hidden;
-      font-family: inherit;
-      font-size: inherit;
-      font-weight: inherit;
-      background: transparent;
-      border: none;
-      outline: none;
-      resize: none;
-    }
-    button {
-      background: #f7f8fa;
-      height: 34px;
-      width: 70%;
-      padding: 4px 10px;
-      font-size: 14px;
-      border: 1px solid #0f88eb;
-      text-align: center;
-      cursor: pointer;
-      border-radius: 3px;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      background: #0f88eb;
-      margin-top: 8px;
-      color: #fff;
-    }
-    button:hover {
-      background: #0d79d1;
-    }
-  </style>
+  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
   <div class="container">
-    <h2>KPush服务</h2>
-    <div class="input">
-        <input placeholder="请输入书名..." id="name" value=""></input>
+    <h2 class="text-center">小孔专属服务</h2>
+    <div class="panel panel-default">
+      <div class="panel-heading"><h4>在线搜索</h4></div>
+      <div class="panel-body">
+        <div class="input">
+          <input placeholder="请输入书名..." id="name" value=""></input>
+        </div>
+        <button id="search" class="btn btn-info center-block">搜索</button>
+      </div>
     </div>
-    <button id="search">搜索</button>
+    <div class="panel panel-info">
+      <div class="panel-heading"><h4>自定义上传</h4></div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-xs-6">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="请输入书籍对应的下载链接地址" id="path1" value="">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" id="push1">推送到自己的Kindle</button>
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="card">
+              <div id="uploader-demo" style="padding-left:6rem;">
+                <div id="fileList" class="uploader-list"></div>
+                <div id="filePicker" style="background-size:3.52rem 4.46rem; min-height:4.46rem;">或者从本地上传文件，推送到Kindle</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <link href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css" rel="stylesheet">
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script>
+  <script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.js"></script>
+  <script>
     var searchItem = localStorage.getItem("searchItem");
     if (searchItem) {
         document.getElementsByTagName('input')[0].value = searchItem;
@@ -90,7 +59,118 @@
             window.location.href = 's?q=' + $("#name").val().trim();
         }
     });
+    $("#push1").on("click", function () {
+        var name = $("#path").val().trim();
+        if(name) {
+            pushFile(name, function () {
+                $("#path").val("");
+            })
+        }
+    });
 
+    function pushFile(name, callBack) {
+        $.getJSON("/pl", {i: name}, function (data) {
+            if(data && data.msg) {
+                $("#msg").html("推送失败，你知道该找谁！");
+            } else {
+                $("#msg").html("推送成功，继续");
+            }
+            if(callBack) {
+                callBack();
+            }
+        });
+    }
+
+    init();
+    var uploader = null;
+    function init() {
+
+        uploader = WebUploader.create({
+
+            // 选完文件后，是否自动上传。
+            auto: true,
+            compress:false,
+
+            // 开起分片上传。
+            chunked:null,
+
+            fileNumLimit:1,
+            fileSizeLimit:52428800, //5M
+            // 是否允许裁剪。
+            crop: false,
+
+            // swf文件路径
+//        swf: '/static/weixin/flash/Uploader.swf',
+
+            // 文件接收服务端。
+            server: '/u',
+
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#filePicker',
+
+        });
+
+        // 当有文件添加进来的时候
+        uploader.on( 'fileQueued', function( file ) {
+            var $li = $(
+                '<div id="' + file.id + '" class="file-item thumbnail">' +
+                file.name +
+                '</div>'
+                ),
+                $img = $li.find('img');
+
+            // $list为容器jQuery实例
+            $("#fileList").append( $li );
+
+        });
+
+        // 文件上传过程中创建进度条实时显示。
+        uploader.on( 'uploadProgress', function( file, percentage ) {
+            var $li = $( '#'+file.id ),
+                $percent = $li.find('.progress span');
+
+            // 避免重复创建
+            if ( !$percent.length ) {
+                $percent = $('<p class="progress"><span></span></p>')
+                    .appendTo( $li )
+                    .find('span');
+            }
+
+            $percent.css( 'width', percentage * 100 + '%' );
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on( 'uploadSuccess', function( file,response) {
+            $( '#'+file.id ).addClass('upload-state-done');
+            console.log(response.filename);
+            if(response.filename) {
+                pushFile(response.filename);
+            }
+        });
+
+        // 文件上传失败，显示上传出错。
+        uploader.on( 'uploadError', function( file ) {
+            var $li = $( '#'+file.id ),
+                $error = $li.find('div.error');
+
+            // 避免重复创建
+            if ( !$error.length ) {
+                $error = $('<div class="error"></div>').appendTo( $li );
+            }
+
+            $error.text('上传失败');
+        });
+
+        // 完成上传完了，成功或者失败，先删除进度条。
+        uploader.on( 'uploadComplete', function( file ) {
+            $( '#'+file.id ).find('.progress').remove();
+            uploader.destory();
+            $("#fileList").empty();
+            init();
+        });
+
+    }
 </script>
 </body>
 
