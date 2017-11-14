@@ -4,6 +4,12 @@
 
 定制个人专属的Kindle电子书推送服务
 
+## 直接使用可以访问个人服务器
+
+[http://k.mengyouyun.cn](http://k.mengyouyun.cn)
+
+请将79096834@qq.com加入kindle的允许接收名单
+
 ## 安装
 
 首先需要安装Node.js环境，且版本大于8，[相关信息请戳这里](https://nodejs.org/en/download/current/)
