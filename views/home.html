@@ -12,22 +12,45 @@
 </head>
 
 <body>
-<section class="fdb-block">
+<header class="bg-dark">
+    <div class="container">
+        <nav class="navbar navbar-expand-md no-gutters">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav2" aria-controls="navbarNav2" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse col-12 col-md-5 order-lg-1" id="navbarNav2">
+                <ul class="navbar-nav col-5">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="navbar-nav justify-content-end col-sm-5 order-lg-12 d-none d-md-flex">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://github.com/mengyou658/KPush"><i class="fa fa-github"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<section>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6 text-center">
+            <div class="col-12 col-md-8 col-lg-6 text-center">
                 <h1>在线搜索（走读派）</h1>
-                <p class="text-h3">
+                <div class="col mt-4 mb-4">
                     <input type="text" class="form-control" placeholder="这里请输入书名..." id="name" value="">
-                </p>
-                <p class="mt-5 mt-sm-4">
-                    <a class="btn" id="search">点这里搜索</a>
-                </p>
+                    <span class="input-group-btn">
+              <button class="btn" type="button" id="search">点这里搜索</button>
+            </span>
+                </div>
             </div>
         </div>
     </div>
 </section>
-<section class="fdb-block">
+<section>
     <div class="container">
         <div class="row text-center pb-0 pb-lg-4">
             <div class="col-12">
@@ -55,12 +78,7 @@
             <div class="col-12 col-sm-10 col-md-6 col-lg-4 ml-sm-auto mr-sm-auto mt-5 mt-md-0">
                 <h3>自定义上传</h3>
                 <h4 class="text-left">
-                    <small class="text-warning">文件类型限制：mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf<a
-                            href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
-                            target="_blank">参考官方文档</a></small>
-                </h4>
-                <h4>
-                    <small class="text-warning">文件大小限制：最大50 MB<a
+                    <small class="text-warning">文件类型限制：mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf，文件大小限制：最大50 MB<a
                             href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
                             target="_blank">参考官方文档</a></small>
                 </h4>
@@ -74,22 +92,6 @@
                     </div>
                 </p>
                 <div class="alert alert-info" id="msg2" style="display: none;"></div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="fdb-block">
-    <div class="container">
-        <div class="row justify-content-start">
-            <div class="col-8 text-left">
-                <h1>小孔专用Kindle推送服务</h1>
-                <p class="text-h3">
-                    <small class="text-warning">其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单</small>
-                </p>
-                <p class="mt-5">
-                    <a class="btn btn-black" href="https://github.com/mengyou658/KPush"><i class="fa fa-github"></i>
-                        Github仓库</a>
-                </p>
             </div>
         </div>
     </div>
