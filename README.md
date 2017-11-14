@@ -8,6 +8,16 @@
 
 首先需要安装Node.js环境，且版本大于8，[相关信息请戳这里](https://nodejs.org/en/download/current/)
 
+```bash
+# 全局安装
+git clone https://github.com/mengyou658/KPush.git 
+cd KPush
+yarn
+npm i -g forever
+forever start cli.js
+forever restart cli.js
+```
+
 ### npm源
 
 ```bash
