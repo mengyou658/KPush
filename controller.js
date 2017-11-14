@@ -47,7 +47,8 @@ module.exports = {
   },
   async pushlocal (ctx) {
       const url = ctx.query.i
-      const err = await push(url)
+      const mail = ctx.query.m
+      const err = await push(url, mail)
       ctx.body = JSON.stringify({
           'msg': err
       });

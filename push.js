@@ -11,12 +11,16 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-module.exports = path => {
+module.exports = (path, mail) => {
   return new Promise((resolve, reject) => {
     console.log(path)
+      var target = config.kindle;
+    if(mail && mail.indexOf("@") > 0) {
+        target = mail;
+    }
     transporter.sendMail({
       from: 'noreply  <' + config.user + '>',
-      to: config.kindle,
+      to: target,
       subject: 'Convert',
       text: 'Pushing to kindle from ' + path,
       attachments: [{ 
