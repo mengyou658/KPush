@@ -8,7 +8,7 @@ const errorView = fs.readFileSync(__dirname + '/views/error.html')
 const homeView = fs.readFileSync(__dirname + '/views/home.html')
 const pushView = fs.readFileSync(__dirname + '/views/push.ejs', { encoding: 'utf-8' })
 const searchView = fs.readFileSync(__dirname + '/views/search.ejs', { encoding: 'utf-8' })
-
+var urlencode = require('urlencode');
 module.exports = {
   async error (ctx, next) {
     try { await next() } catch (err) {
@@ -36,7 +36,7 @@ module.exports = {
 
       const file = ctx.request.body.files.file;
       const reader = fs.createReadStream(file.path);
-      const stream = fs.createWriteStream(path.join(os.tmpdir(), Math.random().toString(), file.name));
+      const stream = fs.createWriteStream(path.join(os.tmpdir(), Math.random().toString() + urlencode(file.name)));
       reader.pipe(stream);
       console.log('uploading %s -> %s', file.name, stream.path);
 

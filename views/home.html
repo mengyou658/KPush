@@ -72,7 +72,7 @@
     </div>
 </div>
 <link href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.js"></script>
 <script>
     var searchItem = localStorage.getItem("searchItem");
@@ -175,7 +175,7 @@
             $('#' + file.id).addClass('upload-state-done');
             console.log(response.filename);
             if (response.filename) {
-                pushFile(response.filename, $("#msg1"));
+                pushFile(response.filename, $("#msg2"));
             }
         });
 
@@ -195,8 +195,10 @@
         // 完成上传完了，成功或者失败，先删除进度条。
         uploader.on('uploadComplete', function (file) {
             $('#' + file.id).find('.progress').remove();
-            uploader.destory();
             $("#fileList").empty();
+            if(uploader) {
+                uploader.destory();
+            }
             init();
         });
 
