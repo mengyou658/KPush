@@ -73,10 +73,25 @@
   <div class="container">
     <h2>KPush服务</h2>
     <div class="input">
-        <input placeholder="请输入书名..."></input>
+        <input placeholder="请输入书名..." id="name" value=""></input>
     </div>
-    <button onclick="window.location.href = 's?q=' + document.getElementsByTagName('input')[0].value ">搜索</button>
+    <button id="search">搜索</button>
   </div>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    var searchItem = localStorage.getItem("searchItem");
+    if (searchItem) {
+        document.getElementsByTagName('input')[0].value = searchItem;
+    }
+    $("#search").on("click", function () {
+        var name = $("#name").val().trim();
+        if(name) {
+            localStorage.setItem("searchItem", name);
+            window.location.href = 's?q=' + $("#name").val().trim();
+        }
+    });
+
+</script>
 </body>
 
 </html>
