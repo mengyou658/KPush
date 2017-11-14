@@ -2,74 +2,84 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>小孔专用Kindle推送服务</title>
-  <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>小孔专用Kindle推送服务</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
-  <div class="container">
+<div class="container">
     <div class="page-header text-center">
-      <h1>小孔专用Kindle推送服务<small>其他人使用，请将79096834@qq.com加入kindle的允许接收名单</small></h1>
+        <h1>小孔专用Kindle推送服务
+            <small>其他人使用，请将79096834@qq.com加入kindle的允许接收名单</small>
+        </h1>
     </div>
     <div class="panel panel-default">
-      <div class="panel-heading"><h4>在线搜索（走读派）</h4></div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="input-group input-group-lg">
-              <input type="text" class="form-control" placeholder="这里请输入书名..." id="name" value="">
-              <span class="input-group-btn">
+        <div class="panel-heading"><h4>在线搜索（走读派）</h4></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" placeholder="这里请输入书名..." id="name" value="">
+                        <span class="input-group-btn">
                 <button class="btn btn-info" type="button" id="search">点这里搜索</button>
               </span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
     <div class="panel panel-info">
-      <div class="panel-heading"><h4>自定义上传</h4></div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-sm-12 col-md-8">
-            <div class="input-group input-group-lg">
-              <input type="text" class="form-control" placeholder="请输入书籍对应的下载链接地址" id="path1" value="">
-              <span class="input-group-btn">
-                <button class="btn btn-info" type="button" id="push1">点这里推送链接文件到自己的Kindle</button>
-              </span>
+        <div class="panel-heading"><h4>自定义上传</h4></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-8">
+                    <div class="well">
+                        <div class="input-group input-group-lg6">
+                            <input type="text" class="form-control" placeholder="请输入书籍对应的下载链接地址"
+                                   id="path1" value="">
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="button" id="push1">
+                                    推送链接
+                                </button>
+                              </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="well">
+                        <div id="uploader-demo" style="padding-left:6rem;">
+                            <div id="fileList" class="uploader-list"></div>
+                            <div id="filePicker" style="background-size:3.52rem 4.46rem; min-height:4.46rem;">
+                                上传并推送文件
+                            </div>
+                        </div>
+                        <div class="alert alert-info" id="msg" style="display: none;"></div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-sm-12 col-md-4">
-            <div class="card">
-              <div id="uploader-demo" style="padding-left:6rem;">
-                <div id="fileList" class="uploader-list"></div>
-                <div id="filePicker" style="background-size:3.52rem 4.46rem; min-height:4.46rem;">点这里从本地上传文件，推送到Kindle</div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-  <link href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css" rel="stylesheet">
-  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.js"></script>
-  <script>
+</div>
+<link href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.js"></script>
+<script>
     var searchItem = localStorage.getItem("searchItem");
     if (searchItem) {
         document.getElementsByTagName('input')[0].value = searchItem;
     }
     $("#search").on("click", function () {
         var name = $("#name").val().trim();
-        if(name) {
+        if (name) {
             localStorage.setItem("searchItem", name);
             window.location.href = 's?q=' + $("#name").val().trim();
         }
     });
     $("#push1").on("click", function () {
         var name = $("#path").val().trim();
-        if(name) {
+        if (name) {
             pushFile(name, function () {
                 $("#path").val("");
             })
@@ -78,12 +88,14 @@
 
     function pushFile(name, callBack) {
         $.getJSON("/pl", {i: name}, function (data) {
-            if(data && data.msg) {
+            if (data && data.msg) {
                 $("#msg").html("推送失败，你知道该找谁！");
+                $("#msg").show();
             } else {
                 $("#msg").html("推送成功，继续");
+                $("#msg").show();
             }
-            if(callBack) {
+            if (callBack) {
                 callBack();
             }
         });
@@ -91,19 +103,20 @@
 
     init();
     var uploader = null;
+
     function init() {
 
         uploader = WebUploader.create({
 
             // 选完文件后，是否自动上传。
             auto: true,
-            compress:false,
+            compress: false,
 
             // 开起分片上传。
-            chunked:null,
+            chunked: null,
 
-            fileNumLimit:1,
-            fileSizeLimit:52428800, //5M
+            fileNumLimit: 1,
+            fileSizeLimit: 52428800, //5M
             // 是否允许裁剪。
             crop: false,
 
@@ -120,7 +133,7 @@
         });
 
         // 当有文件添加进来的时候
-        uploader.on( 'fileQueued', function( file ) {
+        uploader.on('fileQueued', function (file) {
             var $li = $(
                 '<div id="' + file.id + '" class="file-item thumbnail">' +
                 file.name +
@@ -129,50 +142,50 @@
                 $img = $li.find('img');
 
             // $list为容器jQuery实例
-            $("#fileList").append( $li );
+            $("#fileList").append($li);
 
         });
 
         // 文件上传过程中创建进度条实时显示。
-        uploader.on( 'uploadProgress', function( file, percentage ) {
-            var $li = $( '#'+file.id ),
+        uploader.on('uploadProgress', function (file, percentage) {
+            var $li = $('#' + file.id),
                 $percent = $li.find('.progress span');
 
             // 避免重复创建
-            if ( !$percent.length ) {
+            if (!$percent.length) {
                 $percent = $('<p class="progress"><span></span></p>')
-                    .appendTo( $li )
+                    .appendTo($li)
                     .find('span');
             }
 
-            $percent.css( 'width', percentage * 100 + '%' );
+            $percent.css('width', percentage * 100 + '%');
         });
 
         // 文件上传成功，给item添加成功class, 用样式标记上传成功。
-        uploader.on( 'uploadSuccess', function( file,response) {
-            $( '#'+file.id ).addClass('upload-state-done');
+        uploader.on('uploadSuccess', function (file, response) {
+            $('#' + file.id).addClass('upload-state-done');
             console.log(response.filename);
-            if(response.filename) {
+            if (response.filename) {
                 pushFile(response.filename);
             }
         });
 
         // 文件上传失败，显示上传出错。
-        uploader.on( 'uploadError', function( file ) {
-            var $li = $( '#'+file.id ),
+        uploader.on('uploadError', function (file) {
+            var $li = $('#' + file.id),
                 $error = $li.find('div.error');
 
             // 避免重复创建
-            if ( !$error.length ) {
-                $error = $('<div class="error"></div>').appendTo( $li );
+            if (!$error.length) {
+                $error = $('<div class="error"></div>').appendTo($li);
             }
 
             $error.text('上传失败');
         });
 
         // 完成上传完了，成功或者失败，先删除进度条。
-        uploader.on( 'uploadComplete', function( file ) {
-            $( '#'+file.id ).find('.progress').remove();
+        uploader.on('uploadComplete', function (file) {
+            $('#' + file.id).find('.progress').remove();
             uploader.destory();
             $("#fileList").empty();
             init();
@@ -182,9 +195,9 @@
 </script>
 
 <script type="text/javascript">
-    var sogou_ad_id=918676;
-    var sogou_ad_height=90;
-    var sogou_ad_width=728;
+    var sogou_ad_id = 918676;
+    var sogou_ad_height = 90;
+    var sogou_ad_width = 728;
 </script>
 <script type='text/javascript' src='http://images.sohu.com/cs/jsfile/js/c.js'></script>
 
