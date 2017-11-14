@@ -15,8 +15,8 @@ module.exports = (path, mail) => {
   return new Promise((resolve, reject) => {
     console.log(path)
       var target = config.kindle;
-    if(mail && mail.indexOf("@") > 0) {
-        target = mail;
+    if(mail && mail.trim() && mail.indexOf("@") > 0) {
+        target = mail.time();
     }
     transporter.sendMail({
       from: 'noreply  <' + config.user + '>',

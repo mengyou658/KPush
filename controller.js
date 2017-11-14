@@ -27,7 +27,8 @@ module.exports = {
   },
   async p (ctx) {
     const url = await model.getUrl(ctx.query.i)
-    const err = await push(url)
+    const mail = ctx.query.m
+    const err = await push(url, mail)
     ctx.body = ejs.render(pushView, { err })
   },
   async upload (ctx, next) {

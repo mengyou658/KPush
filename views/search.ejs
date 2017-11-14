@@ -162,7 +162,7 @@
 
 <body>
   <div class="msg">
-    <p>确定推送？没点错吧？</p>
+    <p><input type="email" id="mail" class="form-control" placeholder="请这里输入推送邮箱" value=""></p>
     <button onclick="push()">确定</button>
   </div>
   <div class="mask" onclick="hide()"></div>
@@ -208,7 +208,7 @@
       $('.msg p').css({ color: '#8590a6' })
       $('.msg p').fadeOut(500).fadeIn(500)
       setInterval(function() { $('.msg p').fadeOut(500).fadeIn(500) }, 1000)
-      window.location.href = 'p?i=' + curId
+      window.location.href = 'p?i=' + curId +"&m=" + mail
     }
   </script>
 </body>
