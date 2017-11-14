@@ -191,6 +191,10 @@
   <script>
     const msg = $('.msg').first()
     const mask = $('.mask').first()
+    var mail = localStorage.getItem("mail");
+    if (mail) {
+        $("#mail").val(mail);
+    }
     let curId
     function show(id) {
       curId = id
@@ -208,6 +212,9 @@
       $('.msg p').css({ color: '#8590a6' })
       $('.msg p').fadeOut(500).fadeIn(500)
       setInterval(function() { $('.msg p').fadeOut(500).fadeIn(500) }, 1000)
+      if(mail && mail.trim()) {
+          localStorage.setItem("mail", mail.trim())
+      }
       window.location.href = 'p?i=' + curId +"&m=" + mail
     }
   </script>
