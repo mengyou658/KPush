@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="panel panel-info">
-        <div class="panel-heading"><h4>自定义上传</h4></div>
+        <div class="panel-heading"><h4>根据下载链接推送</h4></div>
         <div class="panel-body">
             <div class="row">
                 <div class="col-sm-12 col-md-8">
@@ -46,8 +46,16 @@
                                 </button>
                               </span>
                         </div>
+                        <div class="alert alert-info" id="msg1" style="display: none;"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-info">
+        <div class="panel-heading"><h4>自定义上传</h4></div>
+        <div class="panel-body">
+            <div class="row">
                 <div class="col-sm-12 col-md-4">
                     <div class="well">
                         <div id="uploader-demo" style="padding-left:6rem;">
@@ -56,9 +64,9 @@
                                 上传并推送文件
                             </div>
                         </div>
-                        <div class="alert alert-info" id="msg" style="display: none;"></div>
                     </div>
                 </div>
+                <div class="alert alert-info" id="msg2" style="display: none;"></div>
             </div>
         </div>
     </div>
@@ -81,20 +89,20 @@
     $("#push1").on("click", function () {
         var name = $("#path").val().trim();
         if (name) {
-            pushFile(name, function () {
+            pushFile(name, $("#msg1"), function () {
                 $("#path").val("");
             })
         }
     });
 
-    function pushFile(name, callBack) {
+    function pushFile(name, msg, callBack) {
         $.getJSON("/pl", {i: name}, function (data) {
             if (data && data.msg) {
-                $("#msg").html("推送失败，你知道该找谁！");
-                $("#msg").show();
+                msg.html("推送失败，你知道该找谁！");
+                msg.show();
             } else {
-                $("#msg").html("推送成功，继续");
-                $("#msg").show();
+                msg.html("推送成功，继续");
+                msg.show();
             }
             if (callBack) {
                 callBack();
@@ -167,7 +175,7 @@
             $('#' + file.id).addClass('upload-state-done');
             console.log(response.filename);
             if (response.filename) {
-                pushFile(response.filename);
+                pushFile(response.filename, $("#msg1"));
             }
         });
 
