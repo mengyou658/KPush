@@ -6,94 +6,104 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>小孔专用Kindle推送服务</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="/css/froala_blocks.css">
 </head>
 
 <body>
-<div class="container">
-    <div class="page-header text-center">
-        <h1>小孔专用Kindle推送服务
-        </h1>
-        <h4>
-            <small class="text-warning">其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单</small>
-        </h4>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading"><h4>在线搜索（走读派）</h4></div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="input-group input-group-lg">
-                        <input type="text" class="form-control" placeholder="这里请输入书名..." id="name" value="">
-                        <span class="input-group-btn">
-                <button class="btn btn-info" type="button" id="search">点这里搜索</button>
-              </span>
-                    </div>
-                </div>
+<section class="fdb-block">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 text-center">
+                <h1>在线搜索（走读派）</h1>
+                <p class="text-h3">
+                    <input type="text" class="form-control" placeholder="这里请输入书名..." id="name" value="">
+                </p>
+                <p class="mt-5 mt-sm-4">
+                    <a class="btn" id="search">点这里搜索</a>
+                </p>
             </div>
         </div>
     </div>
-    <div class="page-header text-center">
-        <h1>小孔专用Kindle推送服务</h1>
-        <h4>
-            <small class="text-warning"其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单,<a
-                    href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=201974220"
-                    target="_blank">官方设置教程</a></small>
-        </h4>
-    </div>
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <div class="input-group input-group-lg col-xs-12">
-                <input type="email" class="form-control" placeholder="请这里输入推送邮箱"
-                       id="mail" value="">
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-info">
-        <div class="panel-heading"><h4>根据下载链接推送</h4></div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="input-group-lg col-sm-8">
-                    <input type="text" class="form-control" placeholder="请输入书籍对应的下载链接地址"
-                           id="path1" value="">
-                </div>
-                <div class="input-group-lg col-sm-4">
-                    <button class="btn btn-info" type="button" id="push1">
-                        推送链接
-                    </button>
+</section>
+<section class="fdb-block">
+    <div class="container">
+        <div class="row text-center pb-0 pb-lg-4">
+            <div class="col-12">
+                <h1>小孔专用Kindle推送服务</h1>
+                <h4>
+                    <small class="text-warning">其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单,<a
+                            href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=201974220"
+                            target="_blank">官方设置教程</a></small>
+                </h4>
+                <div class="input-group input-group-lg col-xs-12">
+                    <input type="email" class="form-control" placeholder="请这里输入推送邮箱"
+                           id="mail" value="">
                 </div>
             </div>
-            <div class="alert alert-info" id="msg1" style="display: none;"></div>
         </div>
-    </div>
-    <div class="panel panel-info">
-        <div class="panel-heading"><h4>自定义上传</h4>
-            <h4>
-                <small class="text-warning">文件类型限制：mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf<a
-                        href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
-                        target="_blank">参考官方文档</a></small>
-            </h4>
-            <h4>
-                <small class="text-warning">文件大小限制：最大50 MB<a
-                        href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
-                        target="_blank">参考官方文档</a></small>
-            </h4>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div id="uploader-demo" style="padding-left:6rem;">
+        <div class="row text-center pt-4 pt-md-5">
+            <div class="col-12 col-sm-10 col-md-6 col-lg-4 m-sm-auto">
+                <h3>根据下载链接推送</h3>
+                <p><input type="text" class="form-control" placeholder="请输入书籍对应的下载链接地址"
+                          id="path1" value=""></p>
+                <p class="mt-3"><a class="btn" id="push1">推送链接</a></p>
+                <div class="alert alert-info" id="msg1" style="display: none;"></div>
+            </div>
+
+            <div class="col-12 col-sm-10 col-md-6 col-lg-4 ml-sm-auto mr-sm-auto mt-5 mt-md-0">
+                <h3>自定义上传</h3>
+                <h4 class="text-left">
+                    <small class="text-warning">文件类型限制：mobi,azw,doc,docx,html,htm,rtf,txt,jpeg,jpg,gif,png,bmp,pdf<a
+                            href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
+                            target="_blank">参考官方文档</a></small>
+                </h4>
+                <h4>
+                    <small class="text-warning">文件大小限制：最大50 MB<a
+                            href="https://www.amazon.cn/gp/help/customer/display.html?nodeId=200767340&ref_=pe_1825130_138612630"
+                            target="_blank">参考官方文档</a></small>
+                </h4>
+                <p class="mt-3">
+                    <div id="uploader" class="wu-example">
+                        <!--用来存放文件信息-->
                         <div id="fileList" class="uploader-list"></div>
-                        <div id="filePicker" style="background-size:3.52rem 4.46rem; min-height:4.46rem;">
-                            上传并推送文件
+                        <div class="btns">
+                            <div id="filePicker">上传并推送文件</div>
                         </div>
                     </div>
-                </div>
+                </p>
                 <div class="alert alert-info" id="msg2" style="display: none;"></div>
             </div>
         </div>
     </div>
-</div>
+</section>
+<section class="fdb-block">
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-8 text-left">
+                <h1>小孔专用Kindle推送服务</h1>
+                <p class="text-h3">
+                    <small class="text-warning">其他人使用，请将<strong>79096834@qq.com</strong>加入kindle的允许接收名单</small>
+                </p>
+                <p class="mt-5">
+                    <a class="btn btn-black" href="https://github.com/mengyou658/KPush"><i class="fa fa-github"></i>
+                        Github仓库</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="fdb-block footer-small">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <p>© 2017 梦游. All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 <link href="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/webuploader/0.1.1/webuploader.js"></script>
